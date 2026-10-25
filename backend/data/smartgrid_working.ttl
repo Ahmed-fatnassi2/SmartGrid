@@ -1,0 +1,933 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sg: <http://www.esprit.tn/ontologies/smartgrid#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.esprit.tn/ontologies/smartgrid> a owl:Ontology ;
+    rdfs:label "Ontologie Énergie et Smart Grid"@fr ;
+    rdfs:comment "Production, stockage, bâtiments, lignes de transport, mobilité électrique et systèmes intelligents."@fr .
+
+sg:Barrage_01 a sg:BarrageHydraulique,
+        owl:NamedIndividual ;
+    sg:actif true ;
+    sg:alimente sg:Hopital_01 ;
+    sg:anneeMiseService "2005"^^xsd:int ;
+    sg:emissionCO2 "24.0"^^xsd:float ;
+    sg:estPlusPuissantQue sg:Parc_Eolien_01 ;
+    sg:injecteDans sg:Ligne_01 ;
+    sg:nom "Barrage 01"^^xsd:string ;
+    sg:productionAnnuelle "3500.0"^^xsd:float ;
+    sg:puissance "1200"^^xsd:int ;
+    sg:rendement "85.0"^^xsd:float .
+
+sg:Borne_01 a sg:BorneRapide,
+        owl:NamedIndividual ;
+    sg:disponible true ;
+    sg:estRaccordeeA sg:Ligne_02 ;
+    sg:nom "Borne 01"^^xsd:string ;
+    sg:puissanceCharge "150"^^xsd:int ;
+    sg:recharge sg:Voiture_01 ;
+    sg:tarifKWh "0.45"^^xsd:float ;
+    sg:tempsChargeMinutes "30"^^xsd:int ;
+    sg:typeConnecteur "CCS2"^^xsd:string .
+
+sg:Borne_02 a sg:BorneLente,
+        owl:NamedIndividual ;
+    sg:disponible true ;
+    sg:estRaccordeeA sg:Ligne_03 ;
+    sg:nom "Borne 02"^^xsd:string ;
+    sg:puissanceCharge "11"^^xsd:int ;
+    sg:recharge sg:Bus_01 ;
+    sg:tarifKWh "0.25"^^xsd:float ;
+    sg:tempsChargeMinutes "360"^^xsd:int ;
+    sg:typeConnecteur "Type2"^^xsd:string .
+
+sg:Capteur_01 a sg:CapteurCourant,
+        owl:NamedIndividual ;
+    sg:dateInstallation "2021-03-15"^^xsd:date ;
+    sg:frequenceMesure "10"^^xsd:int ;
+    sg:nom "Capteur 01"^^xsd:string ;
+    sg:precisionMesure "99.5"^^xsd:float ;
+    sg:protocole "MQTT"^^xsd:string ;
+    sg:surveille sg:Ligne_01 ;
+    sg:valeurMesuree "312.5"^^xsd:float ;
+    sg:versionLogiciel "v2.1"^^xsd:string .
+
+sg:Centrale_Biomasse_01 a sg:BiomasseSolide,
+        owl:NamedIndividual ;
+    sg:actif true ;
+    sg:anneeMiseService "2015"^^xsd:int ;
+    sg:emissionCO2 "230.0"^^xsd:float ;
+    sg:injecteDans sg:Ligne_03 ;
+    sg:nom "Centrale Biomasse 01"^^xsd:string ;
+    sg:productionAnnuelle "1800.0"^^xsd:float ;
+    sg:puissance "300"^^xsd:int ;
+    sg:rendement "30.0"^^xsd:float .
+
+sg:Compteur_01 a sg:CompteurResidentiel,
+        owl:NamedIndividual ;
+    sg:dateInstallation "2020-06-01"^^xsd:date ;
+    sg:frequenceMesure "900"^^xsd:int ;
+    sg:mesure sg:Residence_01 ;
+    sg:nom "Compteur 01"^^xsd:string ;
+    sg:precisionMesure "99.0"^^xsd:float ;
+    sg:protocole "Modbus"^^xsd:string ;
+    sg:valeurMesuree "4.2"^^xsd:float ;
+    sg:versionLogiciel "v1.4"^^xsd:string .
+
+sg:Compteur_02 a sg:CompteurIndustriel,
+        owl:NamedIndividual ;
+    sg:dateInstallation "2020-09-12"^^xsd:date ;
+    sg:frequenceMesure "60"^^xsd:int ;
+    sg:mesure sg:Usine_01 ;
+    sg:nom "Compteur 02"^^xsd:string ;
+    sg:precisionMesure "99.8"^^xsd:float ;
+    sg:protocole "Modbus"^^xsd:string ;
+    sg:valeurMesuree "85.0"^^xsd:float ;
+    sg:versionLogiciel "v1.4"^^xsd:string .
+
+sg:Ferme_Solaire a sg:Solaire,
+        owl:NamedIndividual ;
+    sg:actif true ;
+    sg:alimente sg:Ecole_01 ;
+    sg:anneeMiseService "2026"^^xsd:int ;
+    sg:emissionCO2 "14.0"^^xsd:float ;
+    sg:injecteDans sg:Ligne_01 ;
+    sg:nom "ferme solaire"^^xsd:string ;
+    sg:productionAnnuelle "10000.0"^^xsd:float ;
+    sg:puissance "13"^^xsd:int .
+
+sg:Modele_Prevision_01 a sg:PrevisionProduction,
+        owl:NamedIndividual ;
+    sg:dateInstallation "2024-01-10"^^xsd:date ;
+    sg:nom "Modele Prevision 01"^^xsd:string ;
+    sg:precisionMesure "92.0"^^xsd:float ;
+    sg:predit sg:Ferme_Solaire_01 ;
+    sg:protocole "REST"^^xsd:string ;
+    sg:versionLogiciel "v3.0"^^xsd:string .
+
+sg:Plateforme_01 a sg:PlateformeSupervision,
+        owl:NamedIndividual ;
+    sg:dateInstallation "2022-11-05"^^xsd:date ;
+    sg:frequenceMesure "60"^^xsd:int ;
+    sg:gere sg:Batterie_01 ;
+    sg:nom "Plateforme 01"^^xsd:string ;
+    sg:protocole "MQTT"^^xsd:string ;
+    sg:versionLogiciel "v5.2"^^xsd:string .
+
+sg:Station_Hydrogene_01 a sg:Electrolyseur,
+        owl:NamedIndividual ;
+    sg:capacite "10000.0"^^xsd:float ;
+    sg:dureeVieAnnees "20"^^xsd:int ;
+    sg:nom "Station Hydrogene 01"^^xsd:string ;
+    sg:puissanceStockage "1000"^^xsd:int ;
+    sg:rendementStockage "40.0"^^xsd:float ;
+    sg:stocke sg:Parc_Eolien_01 ;
+    sg:tauxCharge "60.0"^^xsd:float ;
+    sg:tempsRechargeHeures "8.0"^^xsd:float .
+
+sg:Supercondensateur_01 a sg:SupercondensateurCarbone,
+        owl:NamedIndividual ;
+    sg:capacite "50.0"^^xsd:float ;
+    sg:dureeVieAnnees "15"^^xsd:int ;
+    sg:nom "Supercondensateur 01"^^xsd:string ;
+    sg:puissanceStockage "200"^^xsd:int ;
+    sg:rendementStockage "98.0"^^xsd:float ;
+    sg:stocke sg:Ferme_Solaire_01 ;
+    sg:tauxCharge "95.0"^^xsd:float ;
+    sg:tempsRechargeHeures "0.1"^^xsd:float .
+
+sg:actif a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range xsd:boolean .
+
+sg:adresse a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:Batiment ;
+    rdfs:range xsd:string .
+
+sg:alimente a owl:ObjectProperty ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range sg:Batiment ;
+    owl:inverseOf sg:estAlimentePar .
+
+sg:anneeConstruction a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:Batiment ;
+    rdfs:range xsd:int .
+
+sg:anneeMiseService a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range xsd:int .
+
+sg:anneePose a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:LigneTransport ;
+    rdfs:range xsd:int .
+
+sg:capacite a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "Capacité en kWh"@fr ;
+    rdfs:domain sg:Stockage ;
+    rdfs:range xsd:float .
+
+sg:capaciteTransport a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "MW"@fr ;
+    rdfs:domain sg:LigneTransport ;
+    rdfs:range xsd:float .
+
+sg:capaciteVehicule a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "kWh"@fr ;
+    rdfs:domain sg:MobiliteElectrique ;
+    rdfs:range xsd:float .
+
+sg:classeEnergetique a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:Batiment ;
+    rdfs:range xsd:string .
+
+sg:consommation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "kWh par an"@fr ;
+    rdfs:domain sg:Batiment ;
+    rdfs:range xsd:float .
+
+sg:dateInstallation a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:SystemeIntelligent ;
+    rdfs:range xsd:date .
+
+sg:disponible a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:MobiliteElectrique ;
+    rdfs:range xsd:boolean .
+
+sg:dureeVieAnnees a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:Stockage ;
+    rdfs:range xsd:int .
+
+sg:emissionCO2 a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "g CO2 par kWh"@fr ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range xsd:float .
+
+sg:estConnecteA a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:domain sg:LigneTransport ;
+    rdfs:range sg:LigneTransport .
+
+sg:estPlusPuissantQue a owl:ObjectProperty,
+        owl:TransitiveProperty ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range sg:SourceProduction .
+
+sg:estRaccordeeA a owl:ObjectProperty ;
+    rdfs:domain sg:BorneRecharge ;
+    rdfs:range sg:LigneTransport .
+
+sg:etatLigne a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:LigneTransport ;
+    rdfs:range xsd:string .
+
+sg:frequenceMesure a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "secondes"@fr ;
+    rdfs:domain sg:SystemeIntelligent ;
+    rdfs:range xsd:int .
+
+sg:gere a owl:ObjectProperty ;
+    rdfs:domain sg:PlateformeGestion ;
+    rdfs:range sg:Stockage .
+
+sg:injecteDans a owl:ObjectProperty ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range sg:LigneTransport ;
+    owl:inverseOf sg:recoitDe .
+
+sg:longueur a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "km"@fr ;
+    rdfs:domain sg:LigneTransport ;
+    rdfs:range xsd:float .
+
+sg:mesure a owl:ObjectProperty ;
+    rdfs:domain sg:CompteurIntelligent ;
+    rdfs:range sg:Batiment ;
+    owl:inverseOf sg:estMesurePar .
+
+sg:nbOccupants a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:Batiment ;
+    rdfs:range xsd:int .
+
+sg:nom a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:range xsd:string .
+
+sg:pertes a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "%"@fr ;
+    rdfs:domain sg:LigneTransport ;
+    rdfs:range xsd:float .
+
+sg:precisionMesure a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "%"@fr ;
+    rdfs:domain sg:SystemeIntelligent ;
+    rdfs:range xsd:float .
+
+sg:predit a owl:ObjectProperty ;
+    rdfs:domain sg:ModelePrediction ;
+    rdfs:range sg:SourceProduction .
+
+sg:productionAnnuelle a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "MWh par an"@fr ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range xsd:float .
+
+sg:protocole a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:SystemeIntelligent ;
+    rdfs:range xsd:string .
+
+sg:puissance a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "Puissance installée en kW"@fr ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range xsd:int .
+
+sg:puissanceCharge a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "kW"@fr ;
+    rdfs:domain sg:MobiliteElectrique ;
+    rdfs:range xsd:int .
+
+sg:puissanceStockage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "kW"@fr ;
+    rdfs:domain sg:Stockage ;
+    rdfs:range xsd:int .
+
+sg:recharge a owl:ObjectProperty ;
+    rdfs:domain sg:BorneRecharge ;
+    rdfs:range sg:VehiculeElectrique ;
+    owl:inverseOf sg:estRechargePar .
+
+sg:rendement a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "Rendement en %"@fr ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range xsd:float .
+
+sg:rendementStockage a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "%"@fr ;
+    rdfs:domain sg:Stockage ;
+    rdfs:range xsd:float .
+
+sg:restitueA a owl:ObjectProperty ;
+    rdfs:domain sg:VehiculeElectrique ;
+    rdfs:range sg:LigneTransport .
+
+sg:stocke a owl:ObjectProperty ;
+    rdfs:domain sg:Stockage ;
+    rdfs:range sg:SourceProduction ;
+    owl:inverseOf sg:estStockePar .
+
+sg:surface a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "m2"@fr ;
+    rdfs:domain sg:Batiment ;
+    rdfs:range xsd:float .
+
+sg:surveille a owl:ObjectProperty ;
+    rdfs:domain sg:CapteurIoT ;
+    rdfs:range sg:LigneTransport .
+
+sg:tarifKWh a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:MobiliteElectrique ;
+    rdfs:range xsd:float .
+
+sg:tauxCharge a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "Taux de charge en %"@fr ;
+    rdfs:domain sg:Stockage ;
+    rdfs:range xsd:float .
+
+sg:tempsChargeMinutes a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:MobiliteElectrique ;
+    rdfs:range xsd:int .
+
+sg:tempsRechargeHeures a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:Stockage ;
+    rdfs:range xsd:float .
+
+sg:tension a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:comment "kV"@fr ;
+    rdfs:domain sg:LigneTransport ;
+    rdfs:range xsd:float .
+
+sg:typeConnecteur a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:MobiliteElectrique ;
+    rdfs:range xsd:string .
+
+sg:valeurMesuree a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:SystemeIntelligent ;
+    rdfs:range xsd:float .
+
+sg:versionLogiciel a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:domain sg:SystemeIntelligent ;
+    rdfs:range xsd:string .
+
+sg:AlertePanne a owl:Class ;
+    rdfs:subClassOf sg:SystemeAlerte .
+
+sg:AlerteSurcharge a owl:Class ;
+    rdfs:subClassOf sg:SystemeAlerte .
+
+sg:BatterieAcidePlomb a owl:Class ;
+    rdfs:subClassOf sg:Batterie .
+
+sg:Batterie_01 a sg:BatterieLithium,
+        owl:NamedIndividual ;
+    sg:capacite "2000.0"^^xsd:float ;
+    sg:dureeVieAnnees "10"^^xsd:int ;
+    sg:nom "Batterie 01"^^xsd:string ;
+    sg:puissanceStockage "500"^^xsd:int ;
+    sg:rendementStockage "92.0"^^xsd:float ;
+    sg:stocke sg:Ferme_Solaire_01 ;
+    sg:tauxCharge "80.0"^^xsd:float ;
+    sg:tempsRechargeHeures "4.0"^^xsd:float .
+
+sg:Biogaz a owl:Class ;
+    rdfs:subClassOf sg:Biomasse .
+
+sg:Boutique a owl:Class ;
+    rdfs:subClassOf sg:Commercial .
+
+sg:BranchementBT a owl:Class ;
+    rdfs:subClassOf sg:BasseTension .
+
+sg:Bus_01 a sg:BusElectrique,
+        owl:NamedIndividual ;
+    sg:capaciteVehicule "300.0"^^xsd:float ;
+    sg:disponible false ;
+    sg:nom "Bus 01"^^xsd:string ;
+    sg:typeConnecteur "Type2"^^xsd:string .
+
+sg:CableSouterrainMT a owl:Class ;
+    rdfs:subClassOf sg:MoyenneTension .
+
+sg:CapteurTemperature a owl:Class ;
+    rdfs:subClassOf sg:CapteurIoT .
+
+sg:CentreCommercial a owl:Class ;
+    rdfs:subClassOf sg:Commercial .
+
+sg:Clinique a owl:Class ;
+    rdfs:subClassOf sg:Hospitalier .
+
+sg:Entrepot a owl:Class ;
+    rdfs:subClassOf sg:Industriel .
+
+sg:EolienOffshore a owl:Class ;
+    rdfs:subClassOf sg:Eolien .
+
+sg:GeothermieBasseEnergie a owl:Class ;
+    rdfs:subClassOf sg:Geothermique .
+
+sg:GeothermieHauteEnergie a owl:Class ;
+    rdfs:subClassOf sg:Geothermique .
+
+sg:Hopital_01 a sg:Hopital,
+        owl:NamedIndividual ;
+    sg:adresse "Boulevard du 9 Avril, Tunis"^^xsd:string ;
+    sg:anneeConstruction "1985"^^xsd:int ;
+    sg:classeEnergetique "E"^^xsd:string ;
+    sg:consommation "1500000.0"^^xsd:float ;
+    sg:nbOccupants "600"^^xsd:int ;
+    sg:nom "Hopital 01"^^xsd:string ;
+    sg:surface "15000.0"^^xsd:float .
+
+sg:InterconnexionInternationale a owl:Class ;
+    rdfs:subClassOf sg:LigneInterconnexion .
+
+sg:InterconnexionNationale a owl:Class ;
+    rdfs:subClassOf sg:LigneInterconnexion .
+
+sg:LigneAerienneMT a owl:Class ;
+    rdfs:subClassOf sg:MoyenneTension .
+
+sg:Maison a owl:Class ;
+    rdfs:subClassOf sg:Residentiel .
+
+sg:MicroCentrale a owl:Class ;
+    rdfs:subClassOf sg:Hydraulique .
+
+sg:ParkingPrive a owl:Class ;
+    rdfs:subClassOf sg:ParkingSmart .
+
+sg:ParkingPublic a owl:Class ;
+    rdfs:subClassOf sg:ParkingSmart .
+
+sg:PileACombustible a owl:Class ;
+    rdfs:subClassOf sg:Hydrogene .
+
+sg:PlateformeFacturation a owl:Class ;
+    rdfs:subClassOf sg:PlateformeGestion .
+
+sg:PrevisionConsommation a owl:Class ;
+    rdfs:subClassOf sg:ModelePrediction .
+
+sg:RaccordementConsommation a owl:Class ;
+    rdfs:subClassOf sg:LigneRaccordement .
+
+sg:RaccordementProduction a owl:Class ;
+    rdfs:subClassOf sg:LigneRaccordement .
+
+sg:ReservoirGravitaire a owl:Class ;
+    rdfs:subClassOf sg:StockageHydraulique .
+
+sg:StationAutoroute a owl:Class ;
+    rdfs:subClassOf sg:StationRecharge .
+
+sg:StationPompage a owl:Class ;
+    rdfs:subClassOf sg:StockageHydraulique .
+
+sg:StationUrbaine a owl:Class ;
+    rdfs:subClassOf sg:StationRecharge .
+
+sg:SupercondensateurHybride a owl:Class ;
+    rdfs:subClassOf sg:Supercondensateur .
+
+sg:Thermodynamique a owl:Class ;
+    rdfs:subClassOf sg:Solaire .
+
+sg:Universite a owl:Class ;
+    rdfs:subClassOf sg:Educatif .
+
+sg:V2GBatiment a owl:Class ;
+    rdfs:subClassOf sg:ServiceV2G .
+
+sg:V2GReseau a owl:Class ;
+    rdfs:subClassOf sg:ServiceV2G .
+
+sg:Voiture_01 a sg:VoitureElectrique,
+        owl:NamedIndividual ;
+    sg:capaciteVehicule "60.0"^^xsd:float ;
+    sg:disponible true ;
+    sg:nom "Voiture 01"^^xsd:string ;
+    sg:restitueA sg:Ligne_03 ;
+    sg:typeConnecteur "CCS2"^^xsd:string .
+
+sg:VolantAcier a owl:Class ;
+    rdfs:subClassOf sg:VolantInertie .
+
+sg:VolantComposite a owl:Class ;
+    rdfs:subClassOf sg:VolantInertie .
+
+sg:estAlimentePar a owl:ObjectProperty ;
+    rdfs:domain sg:Batiment ;
+    rdfs:range sg:SourceProduction .
+
+sg:estMesurePar a owl:ObjectProperty ;
+    rdfs:domain sg:Batiment ;
+    rdfs:range sg:CompteurIntelligent .
+
+sg:estRechargePar a owl:ObjectProperty ;
+    rdfs:domain sg:VehiculeElectrique ;
+    rdfs:range sg:BorneRecharge .
+
+sg:estStockePar a owl:ObjectProperty ;
+    rdfs:domain sg:SourceProduction ;
+    rdfs:range sg:Stockage .
+
+sg:recoitDe a owl:ObjectProperty ;
+    rdfs:domain sg:LigneTransport ;
+    rdfs:range sg:SourceProduction .
+
+sg:BarrageHydraulique a owl:Class ;
+    rdfs:subClassOf sg:Hydraulique .
+
+sg:BatterieLithium a owl:Class ;
+    rdfs:subClassOf sg:Batterie .
+
+sg:BiomasseSolide a owl:Class ;
+    rdfs:subClassOf sg:Biomasse .
+
+sg:BorneLente a owl:Class ;
+    rdfs:subClassOf sg:BorneRecharge .
+
+sg:BorneRapide a owl:Class ;
+    rdfs:subClassOf sg:BorneRecharge .
+
+sg:BusElectrique a owl:Class ;
+    rdfs:subClassOf sg:VehiculeElectrique .
+
+sg:CableSouterrainHT a owl:Class ;
+    rdfs:subClassOf sg:HauteTension .
+
+sg:CapteurCourant a owl:Class ;
+    rdfs:subClassOf sg:CapteurIoT .
+
+sg:CompteurIndustriel a owl:Class ;
+    rdfs:subClassOf sg:CompteurIntelligent .
+
+sg:CompteurResidentiel a owl:Class ;
+    rdfs:subClassOf sg:CompteurIntelligent .
+
+sg:Ecole a owl:Class ;
+    rdfs:subClassOf sg:Educatif .
+
+sg:Ecole_01 a sg:Ecole,
+        owl:NamedIndividual ;
+    sg:adresse "Rue de la Republique, Ariana"^^xsd:string ;
+    sg:anneeConstruction "2003"^^xsd:int ;
+    sg:classeEnergetique "C"^^xsd:string ;
+    sg:consommation "150000.0"^^xsd:float ;
+    sg:nbOccupants "800"^^xsd:int ;
+    sg:nom "Ecole 01"^^xsd:string ;
+    sg:surface "4000.0"^^xsd:float .
+
+sg:Electrolyseur a owl:Class ;
+    rdfs:subClassOf sg:Hydrogene .
+
+sg:EolienTerrestre a owl:Class ;
+    rdfs:subClassOf sg:Eolien .
+
+sg:Hopital a owl:Class ;
+    rdfs:subClassOf sg:Hospitalier .
+
+sg:Immeuble a owl:Class ;
+    rdfs:subClassOf sg:Residentiel .
+
+sg:LigneAerienneHT a owl:Class ;
+    rdfs:subClassOf sg:HauteTension .
+
+sg:Ligne_02 a sg:CableSouterrainHT,
+        owl:NamedIndividual ;
+    sg:anneePose "2012"^^xsd:int ;
+    sg:capaciteTransport "150.0"^^xsd:float ;
+    sg:estConnecteA sg:Ligne_03 ;
+    sg:etatLigne "Bon"^^xsd:string ;
+    sg:longueur "15.0"^^xsd:float ;
+    sg:nom "Ligne 02"^^xsd:string ;
+    sg:pertes "1.2"^^xsd:float ;
+    sg:tension "90.0"^^xsd:float .
+
+sg:Parc_Eolien_01 a sg:EolienTerrestre,
+        owl:NamedIndividual ;
+    sg:actif true ;
+    sg:alimente sg:Usine_01 ;
+    sg:anneeMiseService "2017"^^xsd:int ;
+    sg:emissionCO2 "12.0"^^xsd:float ;
+    sg:estPlusPuissantQue sg:Ferme_Solaire_01 ;
+    sg:injecteDans sg:Ligne_01 ;
+    sg:nom "Parc Eolien 01"^^xsd:string ;
+    sg:productionAnnuelle "2100.0"^^xsd:float ;
+    sg:puissance "800"^^xsd:int ;
+    sg:rendement "35.0"^^xsd:float .
+
+sg:Photovoltaique a owl:Class ;
+    rdfs:subClassOf sg:Solaire .
+
+sg:PlateformeSupervision a owl:Class ;
+    rdfs:subClassOf sg:PlateformeGestion .
+
+sg:PrevisionProduction a owl:Class ;
+    rdfs:subClassOf sg:ModelePrediction .
+
+sg:ReseauDistributionBT a owl:Class ;
+    rdfs:subClassOf sg:BasseTension .
+
+sg:Residence_01 a sg:Immeuble,
+        owl:NamedIndividual ;
+    sg:adresse "Avenue Habib Bourguiba, Tunis"^^xsd:string ;
+    sg:anneeConstruction "2010"^^xsd:int ;
+    sg:classeEnergetique "B"^^xsd:string ;
+    sg:consommation "120000.0"^^xsd:float ;
+    sg:nbOccupants "120"^^xsd:int ;
+    sg:nom "Residence 01"^^xsd:string ;
+    sg:surface "3200.0"^^xsd:float .
+
+sg:SupercondensateurCarbone a owl:Class ;
+    rdfs:subClassOf sg:Supercondensateur .
+
+sg:Usine a owl:Class ;
+    rdfs:subClassOf sg:Industriel .
+
+sg:Usine_01 a sg:Usine,
+        owl:NamedIndividual ;
+    sg:adresse "Zone industrielle, Sfax"^^xsd:string ;
+    sg:anneeConstruction "1998"^^xsd:int ;
+    sg:classeEnergetique "D"^^xsd:string ;
+    sg:consommation "900000.0"^^xsd:float ;
+    sg:nbOccupants "250"^^xsd:int ;
+    sg:nom "Usine 01"^^xsd:string ;
+    sg:surface "8000.0"^^xsd:float .
+
+sg:VoitureElectrique a owl:Class ;
+    rdfs:subClassOf sg:VehiculeElectrique .
+
+sg:BasseTension a owl:Class ;
+    rdfs:subClassOf sg:LigneTransport .
+
+sg:Batterie a owl:Class ;
+    rdfs:subClassOf sg:Stockage .
+
+sg:Biomasse a owl:Class ;
+    rdfs:subClassOf sg:SourceProduction .
+
+sg:Commercial a owl:Class ;
+    rdfs:subClassOf sg:Batiment .
+
+sg:Educatif a owl:Class ;
+    rdfs:subClassOf sg:Batiment .
+
+sg:Eolien a owl:Class ;
+    rdfs:subClassOf sg:SourceProduction .
+
+sg:Geothermique a owl:Class ;
+    rdfs:subClassOf sg:SourceProduction .
+
+sg:HauteTension a owl:Class ;
+    rdfs:subClassOf sg:LigneTransport .
+
+sg:Hospitalier a owl:Class ;
+    rdfs:subClassOf sg:Batiment .
+
+sg:Hydraulique a owl:Class ;
+    rdfs:subClassOf sg:SourceProduction .
+
+sg:Hydrogene a owl:Class ;
+    rdfs:subClassOf sg:Stockage .
+
+sg:Industriel a owl:Class ;
+    rdfs:subClassOf sg:Batiment .
+
+sg:LigneInterconnexion a owl:Class ;
+    rdfs:subClassOf sg:LigneTransport .
+
+sg:LigneRaccordement a owl:Class ;
+    rdfs:subClassOf sg:LigneTransport .
+
+sg:MoyenneTension a owl:Class ;
+    rdfs:subClassOf sg:LigneTransport .
+
+sg:ParkingSmart a owl:Class ;
+    rdfs:subClassOf sg:MobiliteElectrique .
+
+sg:Residentiel a owl:Class ;
+    rdfs:subClassOf sg:Batiment .
+
+sg:ServiceV2G a owl:Class ;
+    rdfs:subClassOf sg:MobiliteElectrique .
+
+sg:StationRecharge a owl:Class ;
+    rdfs:subClassOf sg:MobiliteElectrique .
+
+sg:StockageHydraulique a owl:Class ;
+    rdfs:subClassOf sg:Stockage .
+
+sg:Supercondensateur a owl:Class ;
+    rdfs:subClassOf sg:Stockage .
+
+sg:SystemeAlerte a owl:Class ;
+    rdfs:subClassOf sg:SystemeIntelligent .
+
+sg:VolantInertie a owl:Class ;
+    rdfs:subClassOf sg:Stockage .
+
+sg:CapteurIoT a owl:Class ;
+    rdfs:subClassOf sg:SystemeIntelligent .
+
+sg:Ferme_Solaire_01 a sg:Photovoltaique,
+        owl:NamedIndividual ;
+    sg:actif true ;
+    sg:alimente sg:Ecole_01,
+        sg:Residence_01 ;
+    sg:anneeMiseService "2019"^^xsd:int ;
+    sg:emissionCO2 "45.0"^^xsd:float ;
+    sg:nom "Ferme Solaire 01"^^xsd:string ;
+    sg:productionAnnuelle "900.0"^^xsd:float ;
+    sg:puissance "500"^^xsd:int ;
+    sg:rendement "18.5"^^xsd:float .
+
+sg:Ligne_01 a sg:LigneAerienneHT,
+        owl:NamedIndividual ;
+    sg:anneePose "2001"^^xsd:int ;
+    sg:capaciteTransport "400.0"^^xsd:float ;
+    sg:estConnecteA sg:Ligne_02 ;
+    sg:etatLigne "Bon"^^xsd:string ;
+    sg:longueur "120.0"^^xsd:float ;
+    sg:nom "Ligne 01"^^xsd:string ;
+    sg:pertes "2.5"^^xsd:float ;
+    sg:tension "225.0"^^xsd:float .
+
+sg:Ligne_03 a sg:ReseauDistributionBT,
+        owl:NamedIndividual ;
+    sg:anneePose "2015"^^xsd:int ;
+    sg:capaciteTransport "5.0"^^xsd:float ;
+    sg:etatLigne "Moyen"^^xsd:string ;
+    sg:longueur "3.0"^^xsd:float ;
+    sg:nom "Ligne 03"^^xsd:string ;
+    sg:pertes "4.0"^^xsd:float ;
+    sg:tension "0.4"^^xsd:float .
+
+sg:ModelePrediction a owl:Class ;
+    rdfs:subClassOf sg:SystemeIntelligent .
+
+sg:PlateformeGestion a owl:Class ;
+    rdfs:subClassOf sg:SystemeIntelligent .
+
+sg:Solaire a owl:Class ;
+    rdfs:subClassOf sg:SourceProduction .
+
+sg:CompteurIntelligent a owl:Class ;
+    rdfs:subClassOf sg:SystemeIntelligent .
+
+sg:BorneRecharge a owl:Class ;
+    rdfs:subClassOf sg:MobiliteElectrique .
+
+sg:VehiculeElectrique a owl:Class ;
+    rdfs:subClassOf sg:MobiliteElectrique .
+
+sg:MobiliteElectrique a owl:Class .
+
+sg:SystemeIntelligent a owl:Class .
+
+sg:Stockage a owl:Class .
+
+sg:Batiment a owl:Class .
+
+sg:LigneTransport a owl:Class .
+
+sg:SourceProduction a owl:Class .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:SupercondensateurCarbone sg:SupercondensateurHybride ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:RaccordementProduction sg:RaccordementConsommation ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:ParkingPublic sg:ParkingPrive ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:LigneAerienneHT sg:CableSouterrainHT ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:InterconnexionNationale sg:InterconnexionInternationale ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:CompteurResidentiel sg:CompteurIndustriel ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:CapteurIoT sg:CompteurIntelligent sg:PlateformeGestion sg:ModelePrediction sg:SystemeAlerte ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:BiomasseSolide sg:Biogaz ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:EolienTerrestre sg:EolienOffshore ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:BorneRapide sg:BorneLente ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Solaire sg:Eolien sg:Hydraulique sg:Biomasse sg:Geothermique ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:HauteTension sg:MoyenneTension sg:BasseTension sg:LigneInterconnexion sg:LigneRaccordement ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:GeothermieHauteEnergie sg:GeothermieBasseEnergie ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:VolantAcier sg:VolantComposite ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Hopital sg:Clinique ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Residentiel sg:Industriel sg:Commercial sg:Hospitalier sg:Educatif ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:SourceProduction sg:Stockage sg:Batiment sg:LigneTransport sg:MobiliteElectrique sg:SystemeIntelligent ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:PrevisionProduction sg:PrevisionConsommation ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:VoitureElectrique sg:BusElectrique ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:StationAutoroute sg:StationUrbaine ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:LigneAerienneMT sg:CableSouterrainMT ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:CapteurTemperature sg:CapteurCourant ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Usine sg:Entrepot ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:VehiculeElectrique sg:BorneRecharge sg:StationRecharge sg:ServiceV2G sg:ParkingSmart ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:CentreCommercial sg:Boutique ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:PlateformeSupervision sg:PlateformeFacturation ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:BarrageHydraulique sg:MicroCentrale ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Maison sg:Immeuble ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Batterie sg:StockageHydraulique sg:Hydrogene sg:Supercondensateur sg:VolantInertie ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:ReseauDistributionBT sg:BranchementBT ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Photovoltaique sg:Thermodynamique ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:StationPompage sg:ReservoirGravitaire ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:BatterieLithium sg:BatterieAcidePlomb ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:V2GReseau sg:V2GBatiment ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Ecole sg:Universite ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:Electrolyseur sg:PileACombustible ) .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( sg:AlerteSurcharge sg:AlertePanne ) .
+
